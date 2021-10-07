@@ -1,0 +1,71 @@
+#### Die 5 Tretmienen des Flows ###################################################################
+
+[1] Creator / Owner - Permissions
+
+> Wem gehört der Flow? Wem gehört die App? Es gibt NUR Mit-Besitzer bei Freigaben!
+> Wessen Anmeldedaten wurden bei den Action Items im Flow verwendet?
+> Was passiert, wenn der Mitarbeiter geht? Oder wenn der Account deaktiviert wird?
+> Was passiert, wenn sich alle 72 Tage das Passwort ändert?
+> Verbindungen können gelöscht werden, auch wenn sie noch in Verwendung sind!
+
+[2] Welcher OneDrive? Trigger-Suche vom Feinsten!
+
+> Es gibt alles doppelt: SharePoint, OneDrive, Excel,... (Business VS Private)
+> Nutze den RICHTIGEN Connector, sonst knallt es gewaltig! 
+> Nutze Vorlagen mit Bedacht, weil Verbindungen ggf. neu angelegt werden.
+> Die DOKUMENTATION des jeweiligen Connectors ist gut beschrieben.
+> In einem LEEREN Flow kann alles gelesen und ausprobiert werden, denn Connector erst NACH Auswahl aktiv.
+
+[3.1] "Karl-Heinz?" - "Ja, Meister?" - "So hole er Wasser!" - "Aber gerne..."
+
+> ALLE Action Items sind "Aufforderungen" an die Schnittstelle, etwas zu tun.
+> Connector ist NICHT auskunftspflichtig gegenüber dem Initiator der Schnittstelle!
+> Nur weil das Action etwas tut, heißt das nicht, dass auch wirklich etwas passiert:
+	>> besonders tödlich bei EIGENEN Umgebungen, weil kein Zugriff auf ORGA-Strukturen
+
+[3.2] Keine current item logic für Karl-Heinz : wer er nicht weiß, interessiert ihn auch nicht
+
+> was Du Karl-Heinz nicht sagt, das macht er auch nicht!
+
+	[ Spalte A | Spalte B | Spalte C ]	== schlechte Idee  =>  	[ Spalte A | Spalte B | Spalte C ]
+	[    1	   |     2    |     3    ]   	   'setze [B] = x'	[   NULL   |     x    |   NULL   ]
+
+> dynamic Content MUSS wirklich JEDES MAL angegeben werden, sonst INTO THE VOID
+
+	[ Spalte A | Spalte B | Spalte C ]	=== gute Idee ===>  	[ Spalte A | Spalte B | Spalte C ]
+	[    1	   |     2    |     3    ]   	 'Update {1,x,3}'	[     1    |     x    |     3    ]
+
+	
+[4] Aus der Struktur geboren: Generalist VS Spezialist 
+
+> Flow kennt eigentlich nur zwei Genehmigungen {eMail mit Optionen | Approval}
+> Eskalation ist NICHT fest implementiert, Ablaufzeit ist NICHT setzbar!
+> Mehrstufiges Genehmigungsverfahren eventuell SharePoint-Logik notwendig {SP-WF | Nintex | K2}.
+
+> PATIENCE IS KING >> Alles hat seine Zeit! { 3sec | 5 sec | 60sec | 3 min | 5min | 30min | 1day } > siehe Excel-Mappe
+
+[5] Environmentals : Umgebungen , Sprache , Kultur , ...
+
+> Letzte Meile "Der eigene Rechner"
+	>> PowerShell AS Admin
+	>> $c = Get-Culture
+	>> $c | Format-List -Property *
+	>> $c.Calendar
+> Office365 Konfiguration
+	>> Language Setting
+	>> UTC Setting
+	>> Azure Setting
+> SharePoint Konfiguration
+	>> Site Collection Configuration
+	>> Language & Region Settings
+	>> SubSite könnte davon abweichen!
+> Flow / PowerApp Konfiguration
+	>> Deutsche Konfiguration: Funktion(Schalter;Schalter);;
+	>> Englische Konfiguration: Funktion(Schalter,Schalter);
+	>> "2,7" als String VERSUS 2.7 als Number für Value(...);
+> Flow / PowerApp Administration
+	>> Test-Umgebung VS Produktiv-Umgebung VS Community-Plan
+	>> "Plan 2" wichtig für Ersteller, aber ggf. auch für Benutzer!
+	>> Ausführung = Ausführung mit Handlung oder Anfangstest als Action Item.
+
+###################################################################################################

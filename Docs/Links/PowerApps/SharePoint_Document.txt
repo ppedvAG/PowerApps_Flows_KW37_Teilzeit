@@ -1,0 +1,7 @@
+let
+    Quelle = SharePoint.Files("https://m365x398339.sharepoint.com/sites/teamsite", [ApiVersion = 15]),
+    #"Power Station Sample xlsx_https://m365x398339 sharepoint com/sites/teamsite/Shared Documents/" = Quelle{[Name="Power Station Sample.xlsx",#"Folder Path"="https://m365x398339.sharepoint.com/sites/spielwiese/Shared Documents/"]}[Content],
+    #"Importierte Excel-Datei" = Excel.Workbook(#"Power Station Sample xlsx_https://m365x398339 sharepoint com/sites/spielwiese/Shared Documents/"),
+    PowerStations_Table = #"Importierte Excel-Datei"{[Item="PowerStations",Kind="Table"]}[Data]
+in
+    PowerStations_Table

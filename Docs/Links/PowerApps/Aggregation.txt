@@ -1,0 +1,36 @@
+CountIf(
+    Filiale,
+    Land = "Deutschland"
+		And
+		Text(Created,DateTimeFormat.ShortDate,"de-DE")=Text(dateAuswahl.SelectedDate,DateTimeFormat.ShortDate,"de-DE")
+)
+
+
+
+
+Sum(
+	Filter(
+		Filiale,
+		Land = "Deutschland"
+		And
+	Left(Text(Created,DateTimeFormat.ShortDate,"de-DE"),10)=Text(dateAuswahl.SelectedDate,DateTimeFormat.ShortDate,"de-DE")
+	),
+	Umsatz
+	)
+	& " €"
+
+
+
+
+Text(
+	Average(
+		Filter(
+			Filiale,
+			Land = "Deutschland"
+			And
+			Left(Text(Created,DateTimeFormat.ShortDate,"de-DE"),10)=Text(dateAuswahl.SelectedDate,DateTimeFormat.ShortDate,"de-DE")
+			),
+		rateStimmung.Value
+        ),
+	"[$-de-DE]#,00"
+	)
